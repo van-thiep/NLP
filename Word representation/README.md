@@ -1,3 +1,25 @@
+Table of contents
+- [Overview](#overview)
+- [Visualizing embeddings](#visualizing-embeddings)
+- [TF-IDF](#tf-idf)
+  - [Algos](#algos)
+  - [Pros and cons](#pros-and-cons)
+  - [References](#references)
+- [Word2vec](#word2vec)
+  - [Best practices](#best-practices)
+    - [Pay attention to bias](#pay-attention-to-bias)
+    - [Deployment](#deployment)
+    - [Representations for larger units of text](#representations-for-larger-units-of-text)
+    - [Handle OOV word](#handle-oov-word)
+    - [Universal text representation](#universal-text-representation)
+    - [Others](#others)
+  - [Algos](#algos-1)
+    - [CBOW](#cbow)
+    - [Skipgram](#skipgram)
+  - [References](#references-1)
+- [Glove](#glove)
+- [Fasttext](#fasttext)
+- [Transfomer](#transfomer)
 # Overview
 This part explains all modern word embedding algorithms
 
