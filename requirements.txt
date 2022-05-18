@@ -1,2 +1,5 @@
 nltk
 spacy
+transformer
+tensorflow
+torch 
