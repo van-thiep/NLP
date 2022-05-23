@@ -2,6 +2,10 @@
   - [Components (building blocks)](#components-building-blocks)
     - [Embedding](#embedding)
     - [Positional encoding](#positional-encoding)
+    - [Attention](#attention)
+      - [What is attention?](#what-is-attention)
+      - [Why attention](#why-attention)
+    - [Self-attention](#self-attention)
     - [Multi-head attention](#multi-head-attention)
     - [Masked multi-head attention](#masked-multi-head-attention)
     - [Residual connections](#residual-connections)
@@ -29,10 +33,49 @@ The creative aspect of transformer architecture is attention mechanism which rep
 Embedding sub-layer converts input tokens to vectors of dimention $d_{\text model}$ using learned embeddings.
 ### Positional encoding 
 It helps to provide additional information about words' position in sentences.
-### Multi-head attention 
-Multi-head attention is attention trained in parrallel that makes the training process faster.
 
-Refer to **./Attention.md** file to know more about attention.
+### Attention 
+#### What is attention? 
+In psychology, attention is the cognitive process of selectively concentrating on one or a few things while ignoring others.
+
+A neural network is considered to be an effort to mimic human brain actions in a simplified manner. Attention Mechanism is also an attempt to implement the same action of selectively concentrating on a few relevant things, while ignoring others in deep neural networks
+
+#### Why attention 
+
+The attention mechanism emerged as **an improvement over the encoder decoder-based neural machine translation** system.
+
+Before [Bahdanau et al proposed the first Attention model in 2015](https://arxiv.org/abs/1409.0473), neural machine translation was based on encoder-decoder RNNs/LSTMs. Both encoder and decoder are stacks of LSTM/RNN units. It works in the two following steps:
+- **The encoder LSTM is used to process the entire input sentence and encode it into a context vector, which is the last hidden state of the LSTM/RNN. This is expected to be a good summary of the input sentence**. All the intermediate states of the encoder are ignored, and the final state id supposed to be the initial hidden state of the decoder
+- The decoder LSTM or RNN units produce the words in a sentence one after another
+
+This approach has 2 main drawbacks: 
+- If the encoder makes a bad summary, the translation will also be bad. And indeed, the **encoder creates a bad summary when it tries to understand longer sentences**. RNNs cannot remember longer sentences and sequences due to the vanishing/exploding gradient problem. And Although an LSTM is supposed to capture the long-range dependency better than the RNN, it tends to become forgetful in specific cases.
+- There is no way to give more importance to some of the input words compared to others while translating the sentence
+
+To handle this, Bahdanau et al (2015) came up with a simple but elegant idea where they suggested that not only can all the input words be taken into account in the context vector, but relative importance should also be given to each one of them.
+
+### Self-attention
+Self-attention relates each word to all other words in the sentence to understand more about the word.
+
+![](../Images/self%20attention%20example.png)
+
+**Algos**
+  
+Firstly, From input embedding matrix, we create three new matrices: Query matrix-Q (represent for input), Key matrix - K (represent for target word) and Value matrix - V. To create these, we introduce three new weight matrices, called $W^Q, W^K, W^V$. We create the Q, K, V matrices by multiplying the input embedding matrix by $W^Q, W^K, W^V$ respectively.
+
+Then self-attention layer is computed as following: Z = $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$
+1. First, we compute the dot product between the query matrix and the key matrix,$QK^T$, and get the similarity scores.
+2. Next, we divide $QK^T$ by the square root of the dimension of the key vector,$\sqrt{d_k}$
+3. Then, we apply the softmax function to normalize the scores and obtain the score matrix, $\text{softmax}(\frac{QK^T}{\sqrt{d_k}})$
+4. At the end, we compute the attention matrix, Z , by multiplying the score matrix by the value matrix,V.
+
+![](../Images/self-attention%20mechanism.png)
+### Multi-head attention 
+
+The idea behind using multi-head attention is that instead of using a single attention head, if we use multiple attention heads and concatenate their results, then our attention matrix will be more accurate.
+
+Another benefit is that we can train multi-head attention in parallel.
+
 ### Masked multi-head attention 
 A masked multi-head attention only attends to positions up to and including the current position. The future words are hidden from Transformer, and this force it to learn how to predict.
 ### Residual connections 
