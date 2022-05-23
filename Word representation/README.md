@@ -118,16 +118,17 @@ Create training data
 
 Neural network architecture
 
-![](https://www.researchgate.net/profile/Paul-Compagnon/publication/331714802/figure/fig3/AS:735979677691905@1552482637399/Architecture-of-the-CBOW-model-CBOW-learns-to-predict-a-word-from-its-context-We-can.ppm)
+![](../Images/CBOW_architecture.png)
 ### Skipgram  
 Skipgram predicts the context words from the center words.
 
 Create training data
-![](https://www.researchgate.net/profile/Nourchene-Ouerhani/publication/348558204/figure/fig4/AS:980996300234755@1610899152156/Example-The-quick-brown-fox-jumps-over-the-lazy-dog-Model-CBOW-Input-Layer-White.png)
+
+![](../Images/CBOW_training_data.png)
 
 Neural network architecture
 
-![](https://www.researchgate.net/profile/Erion-Cano/publication/325651523/figure/fig14/AS:635247750299649@1528466274255/CBOW-and-Skip-Gram-neural-architectures.png)
+![](../Images/CBOW-and-Skip-Gram-neural-architectures.png)
 ## References 
 - https://en.wikipedia.org/wiki/Word2vec#Extensions
 - Practical NLP book
